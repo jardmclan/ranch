@@ -93,7 +93,7 @@ function handleGeometry(geometry, polyList) {
     }
     bbox = geometry.bbox;
     if(!bbox) {
-        bbox = getbbox(geometry.coordinates);
+        bbox = getbbox(geometry.coordinates, type);
     }
     details.bbox = bbox;
 
@@ -108,7 +108,7 @@ function getbbox(coordinates, type) {
     let handlePoly = (polygon) => {
         //only care about outer polygon, holes are internal
         outerPoly = polygon[0];
-        for(let coords in outerPoly) {
+        for(let coords of outerPoly) {
             let lng = coords[0];
             let lat = coords[1];
             if(lng < bbox[0]) {
@@ -126,7 +126,6 @@ function getbbox(coordinates, type) {
 
         }
     }
-
     switch(type) {
         case "Polygon": {
             handlePoly(coordinates);

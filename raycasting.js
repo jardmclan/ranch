@@ -1,5 +1,7 @@
   
-  
+  module.exports.isInternal = isInternal;
+
+
   //edges as ordered lists of vertices with multipolygon depth (greatest depth, can wrap single polygons)
   //geometry[polygon[ring[coordinates[]]]]
   
@@ -15,7 +17,7 @@
                 let b = ring[i + 1];
                 //segments intersect iff endpoints of each segment are on opposite sides of the other segment
                 //check if angle formed is counterclockwise to determine which side endpoints fall on
-                if(this.ccw(a, origin, point) != this.ccw(b, origin, point) && this.ccw(a, b, origin) != this.ccw(a, b, point)) {
+                if(ccw(a, origin, point) != ccw(b, origin, point) && ccw(a, b, origin) != ccw(a, b, point)) {
                     internal = !internal
                 }
             }

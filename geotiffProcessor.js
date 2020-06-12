@@ -3,9 +3,9 @@ const geotiff = require("geotiff");
 
 module.exports.getDataFromGeoTIFFFile = getDataFromGeoTIFFFile;
 
-function getDataFromGeoTIFFFile(fpath, customNoData = undefined, bands = undefined) {
+function getDataFromGeoTIFFFile(fpath, customNoData = undefined) {
     return new Promise((resolve, reject) => {
-        getRasterDataFromGeoTIFFArrayBuffer(fpath, customNoData, bands).then((raster) => {
+        getRasterDataFromGeoTIFFArrayBuffer(fpath, customNoData).then((raster) => {
             
             //resolve with indexed values
             resolve({
@@ -44,18 +44,18 @@ function getRasterDataFromGeoTIFFArrayBuffer(fpath, customNoData = undefined, ba
                 let noData = Number.parseFloat(fileDirectory.GDAL_NODATA);
                 
                 geotiffData.header = {
-                    nCols: image.getWidth(),
-                    nRows: image.getHeight(),
-                    xllCorner: tiepoint.x,
-                    yllCorner: tiepoint.y - image.getHeight() * yScale,
+                    ncols: image.getWidth(),
+                    nrows: image.getHeight(),
+                    xllcorner: tiepoint.x,
+                    yllcorner: tiepoint.y - image.getHeight() * yScale,
                 }
                 
                 
                 //generally both scales should be the same (use epsi due to rounding errors)
-                //use cellSize in this general case, or decouple if scales differ
+                //use cellsize in this general case, or decouple if scales differ
                 epsi = 0.00000001
                 if(Math.abs(xScale - yScale) < epsi) {
-                    geotiffData.header.cellSize = xScale;
+                    geotiffData.header.cellsize = xScale;
                 }
                 else {
                     geotiffData.header.cellXSize = xScale;
