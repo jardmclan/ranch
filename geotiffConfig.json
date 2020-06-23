@@ -1,0 +1,9 @@
+{
+    "geotiffIndex": "./input/index.json",
+    "geotiffRoot": "./",
+    "shapefiles": ["./total_ranch.zip", "./Kapapala Ranch.zip", "./McCandless Ranch.zip"],
+    "processLimit": 0,
+    "output": "./output",
+    "nodata": -9999,
+    "geotiffCustomNodata": -3.3999999521443642e+38
+}

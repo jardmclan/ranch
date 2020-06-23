@@ -1,0 +1,5 @@
+{
+    "shapefiles": ["./total_ranch.zip", "./Kapapala Ranch.zip", "./McCandless Ranch.zip"],
+    "input": "daily_rf_data_2019_11_27.csv",
+    "output": "./output/filtered.csv"
+}
